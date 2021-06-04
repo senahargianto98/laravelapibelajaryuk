@@ -20,12 +20,27 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        $this->validate($request,[
+
+        $rules = [
             'username' => 'required|unique:users,username',
             'email' => 'required|email',
             'password' => 'required',
             'password_confirm' => 'required|same:password',
-        ]);
+        ];
+        
+        $messages = [
+            'username.required' => 'Isi Username Anda',
+            'email.required' => 'Isi Email Anda',
+            'password.required' => 'Isi Password Anda',
+            'password_confrim.required' => 'Isi Password Konfirmasi Anda',
+
+            'same' => 'Password dengan Password Confrim Harus sama',
+            'email' => 'Email harus di isikan dengan email valid',
+            'unique' => 'Username sudah di gunakan',
+        ];
+        
+        $request->validate($rules,$messages);
+
         $guest = new User;
         $guest->username = $request->input('username');
         $guest->user_uuid = Uuid::uuid4()->getHex();

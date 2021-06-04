@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ProductsTestController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,10 +33,6 @@ function common(string $scope)
 Route::prefix('admin')->group(function () {
     common('scope.admin');
     Route::middleware(['auth:sanctum', 'scope.admin'])->group(function () {        
-        Route::get('product/test/{id}', [ProductsTestController::class, 'edit']);
-        Route::delete('products/{product}  ', [ProductsTestController::class, 'destroy']);        
-        Route::get('detail/{id}', [ProductsTestController::class, 'detail']);
-        Route::post('product/post/test', [ProductsTestController::class, 'store']);
-        Route::post('product/update/test', [ProductsTestController::class, 'update']);
+        Route::post('profile/post', [ProfileController::class, 'store']);
     });
 });

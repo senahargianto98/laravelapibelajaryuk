@@ -18,8 +18,14 @@ class AuthController extends Controller
         return ($user);
     }
 
-    public function register(RegisterRequest $request)
+    public function register(Request $request)
     {
+        $this->validate($request,[
+            'username' => 'required|unique:users,username',
+            'email' => 'required|email',
+            'password' => 'required',
+            'password_confirm' => 'required|same:password',
+        ]);
         $guest = new User;
         $guest->username = $request->input('username');
         $guest->user_uuid = Uuid::uuid4()->getHex();

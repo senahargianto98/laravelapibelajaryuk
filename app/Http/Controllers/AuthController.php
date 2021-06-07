@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateInfoRequest;
 use App\Http\Requests\UpdatePasswordRequest;
 use Ramsey\Uuid\Uuid;
 use App\Models\User;
+use App\Models\Today;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -14,7 +15,13 @@ class AuthController extends Controller
 {
     public function test(Request $request)
     {
-        $user = User::with('profile')->find(\Auth::id());
+        $user = User::with('profile')->with('schedule')->find(\Auth::id());
+        return ($user);
+    }
+
+    public function today(Request $request)
+    {
+        $user = Today::select('today')->first();
         return ($user);
     }
 

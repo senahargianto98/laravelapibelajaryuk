@@ -13,6 +13,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller
 {
+
+    public function index($id)
+    {
+        $guest = User::where('user_uuid', $id)->select('username')->first();
+        return $guest;
+    }
+
     public function test(Request $request)
     {
         $user = User::with('profile')->with('schedule')->find(\Auth::id());

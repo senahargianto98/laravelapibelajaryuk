@@ -22,6 +22,7 @@ class CreateProfilesTable extends Migration
             $table->string('foto_profile');
             $table->string('pengalaman');
             $table->string('phone');
+            $table->string('tarif');
             $table->string('time_start');
             $table->string('time_end');
             $table->string('jadwal_start');

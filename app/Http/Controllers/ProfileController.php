@@ -4,25 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Profile;
-use Ramsey\Uuid\Uuid;
 
 class ProfileController extends Controller
 {
-    
     public function index(Request $request)
     {
-        $user = Profile::select('mengajar','foto_profile','pengalaman','jurusan','jadwal_start','jadwal_end','nama','sekolah','user_uuid')->get();
-        return ($user);
-    } 
+        $guest = Profile::select('nama','sekolah','jurusan','user_uuid','foto_profile','pengalaman','phone','tarif','time_start','time_end','jadwal_start','jadwal_end','mengajar')->get();
+        return $guest;
+    }
 
     public function store(Request $request)
     { 
         $guest = new Profile;
 
         $guest->nama = $request->input('nama');
+        $guest->tarif = $request->input('tarif');
         $guest->sekolah = $request->input('sekolah');
-
-        $guest->user_uuid = Uuid::uuid4()->getHex();
+        $guest->user_uuid = $request->input('user_uuid');
         $guest->phone = $request->input('phone');
         $guest->time_start = $request->input('time_start');
         $guest->time_end = $request->input('time_end');

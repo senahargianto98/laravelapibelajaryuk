@@ -15,8 +15,38 @@ class ProfileController extends Controller
 
     public function store(Request $request)
     { 
+        $rules = [
+            'nama' => 'required|unique:profiles,nama',
+            'tarif' => 'required',
+            'sekolah' => 'required',
+            'phone' => 'required',
+            'time_start' => 'required',
+            'time_end' => 'required',
+            'jadwal_start' => 'required',
+            'jadwal_end' => 'required',
+            'jurusan' => 'required',
+            'pengalaman' => 'required',
+            'mengajar' => 'required',
+            'foto_profile' => 'required',
+        ];
+        
+        $messages = [
+            'nama.required' => 'Isi Nama Anda',
+            'tarif.required' => 'Isi Tarif Anda',
+            'sekolah.required' => 'Isi Sekolah Anda',
+            'time_start.required' => 'Isi Jam Mulai Mengajar Anda',
+            'time_end.required' => 'Isi Jam Selesai Mengajar Anda',
+            'jadwal_start.required' => 'Isi Jadwal Mulai Mengajar Anda',
+            'jadwal_end.required' => 'Isi Jadwal Akhir Mengajar Anda',
+            'pengalaman.required' => 'Isi Pengelaman Anda',
+            'mengajar.required' => 'Isi Anda Mengajar Apa',
+            'foto_profile.required' => 'Upload Foto Profile Anda',
+            'unique' => 'Nama sudah di gunakan',
+        ];
+        
+        $request->validate($rules,$messages);
+        
         $guest = new Profile;
-
         $guest->nama = $request->input('nama');
         $guest->tarif = $request->input('tarif');
         $guest->sekolah = $request->input('sekolah');

@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 function common(string $scope)
-{
+{ 
     Route::post('register', [AuthController::class, 'register']);
     Route::post('login', [AuthController::class, 'login']);
     Route::get('user/{id}', [AuthController::class, 'index']);
@@ -39,5 +39,7 @@ Route::prefix('admin')->group(function () {
     Route::middleware(['auth:sanctum', 'scope.admin'])->group(function () { 
         Route::get('today', [AuthController::class, 'today']);       
         Route::post('profile/post', [ProfileController::class, 'store']);
+        Route::post('profile/edit', [ProfileController::class, 'update']);
+        Route::get('profile/edit/{id}', [ProfileController::class, 'edit']);
     });
 });

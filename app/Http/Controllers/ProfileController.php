@@ -13,6 +13,47 @@ class ProfileController extends Controller
         return $guest;
     }
 
+    public function edit($id)
+    {
+        $guest = Profile::where('user_uuid', $id)->first();
+        return $guest;
+    }
+
+    public function update(Request $request)
+    {
+        $id = $request->input('id');
+        $guest = Profile::find($id);
+        $guest->nama = $request->input('nama');
+        $guest->nama = $request->input('nama');
+        $guest->tarif = $request->input('tarif');
+        $guest->sekolah = $request->input('sekolah');
+        $guest->user_uuid = $request->input('user_uuid');
+        $guest->phone = $request->input('phone');
+        $guest->time_start = $request->input('time_start');
+        $guest->time_end = $request->input('time_end');
+        $guest->jadwal_start = $request->input('jadwal_start');
+        $guest->jadwal_end = $request->input('jadwal_end');
+        $guest->jurusan = $request->input('jurusan');
+        $guest->pengalaman = $request->input('pengalaman');
+        $guest->mengajar = $request->input('mengajar');
+        $guest->user_id = $request->input('user_id');
+
+        $guest->timestamps = false;
+
+        if ($request->file('foto_profile') == "") {
+            $guest->foto_profile = $guest->foto_profile;
+        }else {
+            $file = $request->file('foto_profile');
+            $file != "";
+            $ext = $file->getClientOriginalExtension();
+            $fileName = rand(10000, 50000) . '.' . $ext;
+            $guest->foto_profile = '/profiles/' . $fileName;
+            $file->move(base_path() . '/public/profiles', $fileName);
+        }        
+        $guest->save();
+        return response($guest);
+    }
+
     public function store(Request $request)
     { 
         $rules = [

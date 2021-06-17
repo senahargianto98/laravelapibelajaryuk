@@ -20,6 +20,15 @@ class AuthController extends Controller
         return $guest;
     }
 
+    public function meet($id)
+    {
+        $guest = User::select('id')
+        ->where('username', $id)
+        ->with('profile:user_id,nama,foto_profile,pengalaman')
+        ->first();
+        return $guest;
+    }
+ 
     public function test(Request $request)
     {
         $user = User::with('profile')->with('schedule')->find(\Auth::id());

@@ -24,7 +24,6 @@ class ProfileController extends Controller
         $id = $request->input('id');
         $guest = Profile::find($id);
         $guest->nama = $request->input('nama');
-        $guest->nama = $request->input('nama');
         $guest->tarif = $request->input('tarif');
         $guest->sekolah = $request->input('sekolah');
         $guest->user_uuid = $request->input('user_uuid');

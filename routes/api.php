@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
-*/
+*/ 
 
 function common(string $scope)
 { 
@@ -23,6 +23,7 @@ function common(string $scope)
     Route::get('user/{id}', [AuthController::class, 'index']);
     Route::post('student/post', [StudentController::class, 'store']);
     Route::get('profile', [ProfileController::class, 'index']);
+    Route::get('meet/{id}', [AuthController::class, 'meet']);
 
     Route::middleware(['auth:sanctum', $scope])->group(function () {
         // Route::get('user/test', [AuthController::class, 'test']);
